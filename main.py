@@ -1,32 +1,6 @@
+from todoTool import *
 
-# might need to move these somewhere else
-    # i would also need ot encode the save file
-def save(todoList):
-    print("Saving your file")
-    with open('save.txt', 'w') as file_object:
-        for i in todoList.values():
-            print(i , file=file_object)
-    print("Your todo list have been save")
-
-def printTodo(todolist):
-    counter = 0
-    for i in todolist.values():
-        print(f"{counter}: {i}")
-        counter += 1
-
-def linebreak():
-    print("-----------------------------------------------------")
-
-def menu():
-    # modify delete to complete but need to indecate what is complete
-    # maybe make one in progress and add what the percentage is done
-        # maybe make this part in js on a website for better lay out
-    print("1: add")
-    print("2: delete")
-    print("3: modify")
-    print("4: printing")
-    print("5: clear all")
-    print("6: quit")
+# this is the main method
 
 def todo():
     # might use a different storage
@@ -53,15 +27,19 @@ def todo():
                     continue
                 case "2":
                     # add case for deleting
-                    print("not added")
+                    print("which one would you like to delete")
+                    delete(todoList)
                 case "3":
                     # add case for modify
                     print("which one do you want to modify")
                     userIdx = int(input())
                     if userIdx < 0 or userIdx > n:
                         print("Sorry you choose a number that isn't in the list")
-                        continue
-                    
+                    else:
+                        print("What text would you like it replace it with")
+                        userTxt = input()
+                        todoList[userIdx] = userTxt
+                        continue    
                 case "4":
                     # add case for printing
                     print("Your current todo list")
@@ -77,11 +55,12 @@ def todo():
                     # add case for quiting
                     save(todoList)
                     quit()
-
+                    
                 # if user enter int value that isn't listed
                 case _ :
                     print("there is no int value for that")
                     continue
+                
         # what if user enter a string 
         except ValueError:
             print("please enter a number value")
